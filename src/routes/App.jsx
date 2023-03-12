@@ -7,20 +7,25 @@ import Payment from "../containers/Payment";
 import Success from "../containers/Success";
 import NotFound from "../containers/NotFound";
 import Layaout from "../components/Layaout";
+import AppContext from "../context/AppContext";
+import useInitialState from "../hooks/useInitialState";
 
 export default function App() {
+  const initialState = useInitialState();
   return (
-    <BrowserRouter>
-      <Layaout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout/information" element={<Information />} />
-          <Route path="/checkout/payment" element={<Payment />} />
-          <Route path="/checkout/success" element={<Success />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layaout>
-    </BrowserRouter>
+    <AppContext.Provider value={initialState}>
+      <BrowserRouter>
+        <Layaout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout/information" element={<Information />} />
+            <Route path="/checkout/payment" element={<Payment />} />
+            <Route path="/checkout/success" element={<Success />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layaout>
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
